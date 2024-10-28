@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Landing from "./pages/Landing"
+import { Game } from "./pages/Game"
 
 
 
@@ -6,11 +8,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 function App() {
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route/>
-      </Routes>
-    </BrowserRouter>
+    <div className="bg-black h-screen">
+      <BrowserRouter >
+        <Routes>
+          <Route path="/" element={<Landing/>}/>
+          <Route path="/game" element={<Game/>}/>
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 
