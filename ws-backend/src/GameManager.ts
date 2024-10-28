@@ -41,12 +41,10 @@ export class GameManager {
             }
 
             if (message.type == MOVE) {
-                console.log("hai from Move", message);
-                
+
                 const game = this.games.find(game => game.player1 === socket || game.player2 === socket)
                 if (game) {
-                    message.MOVE
-                    game.makeMove(socket, message.move)
+                    game.makeMove(socket, message.payload.move)
                 }
             }
         })

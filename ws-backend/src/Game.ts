@@ -50,7 +50,6 @@ export class Game {
 
         try {
             this.board.move(move)
-            this.moveCount = this.moveCount++;
         } catch (e) {
             console.log(e);
             return 
@@ -75,15 +74,15 @@ export class Game {
 
         if (this.moveCount % 2 === 0) {
             this.player2.send(JSON.stringify({
-                type : MOVE,
-                payload : move
+                type: MOVE,
+                payload: move
             }))
         } else {
             this.player1.send(JSON.stringify({
-                type : MOVE,
-                payload : move
+                type: MOVE,
+                payload: move
             }))
         }
-        this.moveCount++ ;
+        this.moveCount++;
     }
 }
