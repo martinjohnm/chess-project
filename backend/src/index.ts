@@ -10,6 +10,7 @@ import { COOKIE_MAX_AGE } from "./consts";
 import { initPassport } from "./passport";
 import passport from "passport";
 import cors from "cors"
+import authRoute from './router/auth';
 
 const app = express();
 
@@ -41,6 +42,9 @@ app.use(
     credentials: true,
   }),
 );
+
+
+app.use('/auth', authRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -1,6 +1,7 @@
 import { Chess, Color, PieceSymbol, Square } from "chess.js";
 import { useState } from "react";
 import { MOVE } from "../pages/Game";
+import ChessSquare from "./chessboard/ChessSquare";
 
 
 export const ChessBoard = ({chess, board, socket, setBoard} : Board) => {
@@ -32,25 +33,17 @@ export const ChessBoard = ({chess, board, socket, setBoard} : Board) => {
                                 }
                             }))
 
-
                             setFrom(null)
-                            
                             chess.move({
                                 from, 
                                 to : squareRepresentaion
                             })
                             setBoard(chess.board())
-                            console.log({
-                                from, 
-                                to : squareRepresentaion
-                            });
-
-                            
                         }
-                    }} key={j} className={`w-16 h-16 ${(i+j)%2==0 ? "bg-white" : "bg-green-600"}`}>
+                    }} key={j} className={`w-16 h-16 lg:w-24 lg:h-24 ${(i+j)%2==0 ? "bg-[#ebecd0]" : "bg-[#739552]"}`}>
                         <div className="w-full justify-center flex h-full">
                             <div className="h-full justify-center flex flex-col">
-                                {square ? square.type : ""}
+                                {square && <ChessSquare square={square} />}
                             </div>
                         </div>
                     </div>

@@ -18,7 +18,16 @@ model User {
   username      String?  @unique
   name          String?
   email         String   @unique
+  provider      AuthProvider
   password      String?
   createdAt     DateTime @default(now())
   lastLogin     DateTime?
+}
+
+
+enum AuthProvider {
+  EMAIL
+  GOOGLE
+  GITHUB
+  GUEST
 }

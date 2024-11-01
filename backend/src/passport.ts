@@ -1,7 +1,11 @@
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const GithubStrategy = require('passport-github2').Strategy;
+
+
 import passport from 'passport';
 import dotenv from 'dotenv';
+import db from "./db"
+
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 
 
 
@@ -22,20 +26,37 @@ export function initPassport() {
       'Missing environment variables for authentication providers',
     );
   }
-  passport.use(new GoogleStrategy({
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: '/auth/google/callback'
-    },
-    (accessToken: any,
-    refreshToken : any,
-    profile : any,
-    done : any) => {
-      // Save user profile here or create a user in your database
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: GOOGLE_CLIENT_ID,
+        clientSecret: GOOGLE_CLIENT_SECRET,
+        callbackURL: '/auth/google/callback',
+      },
+      async function (
+        accessToken: string,
+        refreshToken: string,
+        profile: any,
+        done: (error: any, user?: any) => void,
+      ) {
+        const user = await db.user.upsert({
+          create: {
+            email: profile.emails[0].value,
+            name: profile.displayName,
+            provider: 'GOOGLE',
+          },
+          update: {
+            name: profile.displayName,
+          },
+          where: {
+            email: profile.emails[0].value,
+          },
+        });
 
-      return done(null, profile);
-    }
-  ));
+        done(null, user);
+      },
+    ),
+  );
 
   passport.serializeUser(function (user: any, cb) {
     process.nextTick(function () {

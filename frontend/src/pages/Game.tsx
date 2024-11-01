@@ -47,12 +47,12 @@ export const Game = () => {
 
     
     return <div className="justify-center flex">
-        <div className="pt-8 max-w-screen-lg w-full">
-            <div className="grid grid-cols-6 gap-4 w-full">
-                <div className="col-span-4 w-full flex justify-center">
+        <div className="pt-8 max-w-screen w-full">
+            <div className="grid grid-cols-6 gap-2 w-full">
+                <div className="col-span-6 md:col-span-3 w-full flex justify-center">
                     <ChessBoard chess={chess} setBoard = {setBoard} board = {board} socket={socket}/>
                 </div>
-                <div className="col-span-2 bg-slate-900 w-full flex justify-center">
+                <div className="md:col-span-2 bg-slate-900 w-full flex justify-center">
                     <div className="pt-8">
                         <Button onClick={() => {
                             socket.send(JSON.stringify({

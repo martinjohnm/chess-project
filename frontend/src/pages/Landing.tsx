@@ -10,7 +10,7 @@ export default function Landing() {
     return (
       <div className="mx-auto container max-w-5xl pt-10 px-6">
         <div className="grid-cols-1 md:grid-cols-2 gap-4 grid">
-            <div className="md:col-span-1">
+            <div className="md:col-span-1 hidden md:block">
                 <img className="rounded-md" src="chess.png" alt="" />
             </div>
             <div className="md:col-span-1 flex justify-center px-2">
@@ -30,8 +30,12 @@ export default function Landing() {
                 </div>
               </div>
             </div>
+            <div className="flex justify-center px-2 md:col-span-1 md:hidden">
+                <img className="rounded-md py-10 max-w-100" src="chess.png" alt="" />
+            </div>
         </div>
       </div>
+   
     );
   }
   
